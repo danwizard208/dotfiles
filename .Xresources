@@ -1,0 +1,6 @@
+Xcursor.theme: redglass
+URxvt*background: [90]Black
+URxvt*foreground: Green
+URxvt*depth: 32
+!URxvt*shading: 20
+URxvt*font: xft:monospace:size=12
