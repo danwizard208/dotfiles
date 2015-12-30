@@ -7,3 +7,6 @@
 [submodule "awesome-terminal-fonts"]
 	path = awesome-terminal-fonts
 	url = https://github.com/gabrielelana/awesome-terminal-fonts
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts
