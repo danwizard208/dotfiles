@@ -4,3 +4,6 @@
 [submodule "dircolors-solarized"]
 	path = dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
+[submodule "awesome-terminal-fonts"]
+	path = awesome-terminal-fonts
+	url = https://github.com/gabrielelana/awesome-terminal-fonts
