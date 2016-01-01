@@ -9,10 +9,10 @@ xrdb -merge $HOME/.Xresources
 #Set cursor
 xsetroot -cursor_name redglass
 
-#Enable compositing
-# if [ -x `which xcompmgr` ] ; then
-#     xcompmgr -c &
-# fi
+# Enable compositing
+if [ -x `which xcompmgr` ] ; then
+    xcompmgr -c &
+fi
 
 #Switch between English and Hebrew using shift-esc
 # setxkbmap -option "" -layout "us,il" -option \
@@ -45,6 +45,9 @@ fi
 # if [ -x `which mate-volume-control-applet` ] ; then
 #     mate-volume-control-applet &
 # fi
+if [ -x `which xfce4-volumed` ] ; then
+    xfce4-volumed
+fi
 if [ -x `which dropbox` ] ; then
     dropbox start &
 fi
