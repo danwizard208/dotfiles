@@ -6,13 +6,14 @@ export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode history time)
 export POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
+plugins=(vi-mode)
 #begin antigen
 
 source ~/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle vi-mode
+# antigen bundle vi-mode
 antigen bundle last-working-dir
 antigen bundle copydir
 antigen bundle copyfile
@@ -24,7 +25,8 @@ antigen bundle web-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Theme
-antigen theme bhilburn/powerlevel9k powerlevel9k
+# antigen theme bhilburn/powerlevel9k powerlevel9k
+export ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Tell antigen that you're done.
 antigen apply
