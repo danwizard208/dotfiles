@@ -5,6 +5,9 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 import XMonad.StackSet
 import XMonad.Util.Scratchpad
+import XMonad.Layout
+import XMonad.Layout.Tabbed
+import XMonad.Layout.NoBorders
 import System.IO
 
 mainModMask = mod4Mask
@@ -24,6 +27,7 @@ main = do
 
   --  Utility keys
     , ("M-<F12>", scratchpadSpawnActionCustom "gnome-terminal --name scratchpad")
+    , ("M-b", sendMessage ToggleStruts)
     --, ((controlMask, xK_Print), 
     --    spawn "sleep 0.2; scrot -s -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
     --, ((0, xK_Print), spawn "scrot -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
@@ -42,9 +46,10 @@ main = do
     --, ((controlMask .|. shiftMask, xK_m),      spawn "banshee --show")
     ]
 
+
 myConfig xmobarProc = defaultConfig
         { manageHook = myManageHook <+> manageHook defaultConfig
-        , layoutHook = avoidStruts  $  layoutHook defaultConfig
+        , layoutHook = myLayoutHook
         , modMask = mod4Mask
         , logHook = dynamicLogWithPP xmobarPP
                        { ppOutput = hPutStrLn xmobarProc
@@ -52,6 +57,21 @@ myConfig xmobarProc = defaultConfig
                        }
         , focusFollowsMouse = False
         } 
+
+myLayoutHook = avoidStruts $
+     noBorders simpleTabbed
+     ||| myTallLayout 
+     ||| Mirror myTallLayout
+     ||| noBorders Full
+
+myTallLayout = Tall nmaster delta ratio
+    where
+        -- Default number of windows in the master pane
+        nmaster = 1
+        -- Percent of screen to increment by when resizing panes
+        delta   = 2/100
+        -- Default proportion of screen occupied by master pane
+        ratio   = 1/2
 
 myManageHook = composeAll
     [
