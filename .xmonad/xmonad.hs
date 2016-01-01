@@ -16,8 +16,8 @@ myLauncher = "$(yeganesh -x -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso88
 
 main = do
   xmobarProc <- spawnPipe "/usr/bin/xmobar $HOME/.xmobarrc"
-  xmonad $ (myConfig xmobarProc) `additionalKeysP` 
-    [ 
+  xmonad $ (myConfig xmobarProc) `additionalKeysP`
+    [
   --  Power-state keys
       ("M-S-l", spawn "xscreensaver-command -lock")
     , ("M-S-z", spawn "gksudo -g --message 'Suspend?' pm-suspend")
@@ -28,19 +28,19 @@ main = do
   --  Utility keys
     , ("M-<F12>", scratchpadSpawnActionCustom "gnome-terminal --name scratchpad")
     , ("M-b", sendMessage ToggleStruts)
-    --, ((controlMask, xK_Print), 
+    --, ((controlMask, xK_Print),
     --    spawn "sleep 0.2; scrot -s -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
     --, ((0, xK_Print), spawn "scrot -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
   ----  Banshee keys
-    --, ((controlMask .|. shiftMask, xK_Right),  
+    --, ((controlMask .|. shiftMask, xK_Right),
     --    spawn "banshee --next")
-    --, ((controlMask .|. shiftMask, xK_Left),   
+    --, ((controlMask .|. shiftMask, xK_Left),
     --    spawn "banshee --restart-or-previous")
     --            "notify-send Banshee\\ `banshee --query-volume`")
-    --, ((controlMask .|. shiftMask, xK_Down),   
+    --, ((controlMask .|. shiftMask, xK_Down),
     --    spawn $ "banshee --set-volume=-10;"++
     --            "notify-send Banshee\\ `banshee --query-volume`")
-    --, ((controlMask .|. shiftMask, xK_space),  
+    --, ((controlMask .|. shiftMask, xK_space),
     --    spawn "banshee --toggle-playing")
     --, ((controlMask .|. shiftMask, xK_Return), spawn "banshee --stop")
     --, ((controlMask .|. shiftMask, xK_m),      spawn "banshee --show")
@@ -56,11 +56,11 @@ myConfig xmobarProc = defaultConfig
                        , ppTitle = xmobarColor "green" "" . shorten 50
                        }
         , focusFollowsMouse = False
-        } 
+        }
 
 myLayoutHook = avoidStruts $
      noBorders simpleTabbed
-     ||| myTallLayout 
+     ||| myTallLayout
      ||| Mirror myTallLayout
      ||| noBorders Full
 
@@ -78,7 +78,7 @@ myManageHook = composeAll
       className =? "Xmessage" --> doFloat
     , manageDocks
     , manageScratchPad
-    ] 
+    ]
 
 manageScratchPad :: ManageHook
 manageScratchPad = scratchpadManageHook (RationalRect l t w h)
