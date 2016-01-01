@@ -2,3 +2,7 @@ xmonad.errors
 xmonad.hi
 xmonad.o
 xmonad-x86_64-linux
+
+.ssh/id_rsa
+.ssh/id_rsa.pub
+.ssh/known_hosts
