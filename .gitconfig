@@ -1,3 +1,5 @@
 [user]
 	email = danwizard208@gmail.com
 	name = Daniel Asher Resnick
+[push]
+	default = simple
