@@ -18,10 +18,10 @@ main = do
     [
   --  Power-state keys
       ("M-S-l", spawn "xscreensaver-command -lock")
-    , ("M-S-z", spawn "gksudo -g --message 'Suspend?' pm-suspend")
+    , ("M-S-z", spawn "sudo pm-suspend")
+    , ("M-S-y", spawn "sudo pm-hibernate")
     , ("M-S-e", spawn "gksudo -g --message 'Shut down?' poweroff")
     , ("M-S-r", spawn "gksudo -g --message 'Reboot?' reboot")
-    , ("M-S-y", spawn "gksudo -g --message 'Hibernate?' pm-hibernate")
 
   --  Utility keys
     , ("M-<F12>", scratchpadSpawnActionCustom "gnome-terminal --name scratchpad")
