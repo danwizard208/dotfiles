@@ -12,8 +12,6 @@ import System.IO
 
 mainModMask = mod4Mask
 
-myLauncher = "$(yeganesh -x -- -fn '-*-terminus-*-r-normal-*-*-120-*-*-*-*-iso8859-*' -nb '#000000' -nf '#FFFFFF' -sb '#7C7C7C' -sf '#CEFFAC')"
-
 main = do
   xmobarProc <- spawnPipe "/usr/bin/xmobar $HOME/.xmobarrc"
   xmonad $ (myConfig xmobarProc) `additionalKeysP`
