@@ -5,3 +5,11 @@
 	default = simple
 [diff]
 	tool = vimdiff
+[core]
+	excludesfile = /home/dresnick/.gitignore_global
+[alias]
+	con = config --global
+	alias = "!f() { git config --global alias.$1 $2; }; f"
+	last = log -1 HEAD
+	co = commit
+	st = status
