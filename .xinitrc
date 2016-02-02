@@ -36,15 +36,9 @@ Fire up apps
 if [ -x `which xscreensaver` ] ; then
     xscreensaver -no-splash &
 fi
-# if [ -x `which nm-applet` ] ; then
-#    nm-applet -t &
-# fi
-# if [ -x `which xfce4-power-manager` ] ; then
-#     xfce4-power-manager &
-# fi
-# if [ -x `which mate-volume-control-applet` ] ; then
-#     mate-volume-control-applet &
-# fi
+if [ -x `which wicd-gtk` ] ; then
+   wicd-gtk -t &
+fi
 if [ -x `which xfce4-volumed` ] ; then
     xfce4-volumed
 fi
