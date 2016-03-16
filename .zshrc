@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 export POWERLEVEL9K_MODE="awesome-fontconfig"
 export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode history time)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode time)
 export POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
 plugins=(vi-mode)
