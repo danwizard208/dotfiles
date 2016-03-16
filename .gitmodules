@@ -13,3 +13,6 @@
 [submodule "antigen"]
 	path = antigen
 	url = https://github.com/zsh-users/antigen
+[submodule "xresources-solarized"]
+	path = xresources-solarized
+	url = https://github.com/solarized/xresources
