@@ -1,14 +1,19 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
-import XMonad.StackSet
+import qualified XMonad.StackSet as W
 import XMonad.Util.Scratchpad
+import XMonad.Util.NamedScratchpad
 import XMonad.Layout
 import XMonad.Layout.Tabbed
+import XMonad.Layout.IM
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
 import System.IO
+import Data.Ratio ((%))
 
 mainModMask = mod4Mask
 
@@ -24,29 +29,32 @@ main = do
     , ("M-S-r", spawn "gksudo -g --message 'Reboot?' reboot")
 
   --  Utility keys
-    , ("M-<F12>", scratchpadSpawnActionCustom "gnome-terminal --name scratchpad")
+    , ("M-<F12>", namedScratchpadAction myScratchPads "terminal")
     , ("M-b", sendMessage ToggleStruts)
-    --, ((controlMask, xK_Print),
-    --    spawn "sleep 0.2; scrot -s -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
-    --, ((0, xK_Print), spawn "scrot -e \"mv \\$f ${SCREENSHOTS_DIR}\"")
-  ----  Banshee keys
-    --, ((controlMask .|. shiftMask, xK_Right),
-    --    spawn "banshee --next")
-    --, ((controlMask .|. shiftMask, xK_Left),
-    --    spawn "banshee --restart-or-previous")
-    --            "notify-send Banshee\\ `banshee --query-volume`")
-    --, ((controlMask .|. shiftMask, xK_Down),
-    --    spawn $ "banshee --set-volume=-10;"++
-    --            "notify-send Banshee\\ `banshee --query-volume`")
-    --, ((controlMask .|. shiftMask, xK_space),
-    --    spawn "banshee --toggle-playing")
-    --, ((controlMask .|. shiftMask, xK_Return), spawn "banshee --stop")
-    --, ((controlMask .|. shiftMask, xK_m),      spawn "banshee --show")
     ]
 
+myTerminal = "gnome-terminal"
+
+myWorkspaces =
+    (map show [1..6]) ++ 
+    ["7","8","9"]
+
+myScratchPads = [
+    NS "terminal" spawnTerm findTerm manageTerm
+    ]
+    where
+        spawnTerm = myTerminal ++ " --role=scratchpad --hide-menubar"
+        findTerm = stringProperty "WM_WINDOW_ROLE" =? "scratchpad"
+        manageTerm = customFloating $ W.RationalRect l t w h
+            where           --All below are fractions of screen size
+                h = 0.4     --terminal height
+                w = 1       --terminal width
+                t = 0       --distance from top edge
+                l = 1 - w   --distance from left edge
 
 myConfig xmobarProc = defaultConfig
-        { manageHook = myManageHook <+> manageHook defaultConfig
+        { workspaces = myWorkspaces
+        , manageHook = myManageHook <+> manageHook defaultConfig
         , layoutHook = myLayoutHook
         , modMask = mod4Mask
         , logHook = dynamicLogWithPP xmobarPP
@@ -57,10 +65,26 @@ myConfig xmobarProc = defaultConfig
         }
 
 myLayoutHook = avoidStruts $
+    onWorkspace "7" skypeLayout $
+    onWorkspace "8" imLayout $
+    standardLayouts
+
+standardLayouts = 
      noBorders simpleTabbed
      ||| myTallLayout
      ||| Mirror myTallLayout
      ||| noBorders Full
+
+imLayout = withIM (1/5) pidginMainWindow standardLayouts
+    where
+        pidginMainWindow = 
+            (Role "buddy_list")
+
+skypeLayout = withIM (1/5) skypeMainWindow standardLayouts
+    where
+        skypeMainWindow =
+            (And (Resource "skype")
+                 (Not (Role "ConversationsWindow")))
 
 myTallLayout = Tall nmaster delta ratio
     where
@@ -74,14 +98,10 @@ myTallLayout = Tall nmaster delta ratio
 myManageHook = composeAll
     [
       className =? "Xmessage" --> doFloat
+    , resource =? "skype"    --> doShift "7"  -- Force to Skype workspace.
     , manageDocks
     , manageScratchPad
     ]
 
 manageScratchPad :: ManageHook
-manageScratchPad = scratchpadManageHook (RationalRect l t w h)
-    where           --All below are fractions of screen size
-        h = 0.4     --terminal height
-        w = 1       --terminal width
-        t = 0       --distance from top edge
-        l = 1 - w   --distance from left edge
+manageScratchPad = namedScratchpadManageHook myScratchPads

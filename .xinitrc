@@ -66,4 +66,5 @@ fi
 
 #Launch xmonad
 
-exec xmonad
+# exec xmonad
+ssh-agent xmonad
