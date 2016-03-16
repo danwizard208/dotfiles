@@ -9,7 +9,12 @@
 	excludesfile = /home/dresnick/.gitignore_global
 [alias]
 	con = config --global
-	alias = "!f() { git config --global alias.$1 $2; }; f"
+	alias = "!f() { git config --global alias.$1 \"$2\"; }; f"
 	last = log -1 HEAD
-	co = commit
+    co = checkout
+	cm = commit
 	st = status
+	dt = difftool
+	a = add
+	conl = config --global --list
+	unalias = "!f() { git config --global --unset alias.$1; }; f"
