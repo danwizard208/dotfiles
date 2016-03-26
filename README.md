@@ -15,3 +15,4 @@ My linux dotfiles
 1. Sym-link stuff in home-links
 2. [TODO] solarized stuff (dircolors, shell, etc.)
 3. [TODO] font stuff
+4. [TODO] add per-machine configuration extentions
