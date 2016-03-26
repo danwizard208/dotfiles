@@ -6,7 +6,7 @@
 [diff]
 	tool = vimdiff
 [core]
-	excludesfile = /home/dresnick/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
 	con = config --global
 	alias = "!f() { git config --global alias.$1 \"$2\"; }; f"
