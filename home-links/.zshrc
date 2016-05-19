@@ -25,8 +25,8 @@ antigen bundle web-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Theme
-# antigen theme bhilburn/powerlevel9k powerlevel9k
-export ZSH_THEME="powerlevel9k/powerlevel9k"
+antigen theme bhilburn/powerlevel9k powerlevel9k
+# export ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Tell antigen that you're done.
 antigen apply
@@ -83,12 +83,13 @@ antigen apply
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/daniel/.cabal/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/daniel/.cabal/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 eval `dircolors ~/dotfiles/dircolors-solarized/dircolors.ansi-universal`
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
+# source /home/daniel/.oh-my-zsh/themes/pygmalion.zsh-theme
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -114,3 +115,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

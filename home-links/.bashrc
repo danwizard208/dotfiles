@@ -100,3 +100,5 @@ ${CYAN} - on DISPLAY: ${RED}$DISPLAY${NO_COLOUR}\n"
 echo -e "$GREETING"
 # defined in .bash_funcs, clears screen and prints greeting
 # clg
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

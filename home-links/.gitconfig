@@ -19,6 +19,8 @@
 	conl = config --global --list
 	unalias = "!f() { git config --global --unset alias.$1; }; f"
 	fstart = flow feature start
+	unstage = reset HEAD
+	cmm = commit -m
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
