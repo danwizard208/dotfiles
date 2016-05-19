@@ -23,6 +23,9 @@
 	cmm = commit -m
 	uncommit = reset HEAD^
 	goback = reset --hard HEAD^
+	plr = pull --rebase
+	fmod = diff --name-status
+	h = help
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
