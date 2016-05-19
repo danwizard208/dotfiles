@@ -21,6 +21,8 @@
 	fstart = flow feature start
 	unstage = reset HEAD
 	cmm = commit -m
+	uncommit = reset HEAD^
+	goback = reset --hard HEAD^
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
