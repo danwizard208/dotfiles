@@ -1,15 +1,19 @@
-Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+Config {
+         font = "xft:DroidSansMonoForPowerline Nerd Font:size=12:bold"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
        , lowerOnStart = True
-       , commands = [ Run Weather "CYKF" ["-t","<tempC> °C","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
+       , commands = [ Run Weather "KMDW" ["-t","<tempF> °F","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
                     , Run Date "%_d %B %Y" "date" 10
                     , Run Date "%R" "time" 10
                     , Run StdinReader
-                    , Run Battery ["-t","Batt: <left>"] 600
+                    , Run DynNetwork [] 10
+                    -- , Run Battery ["-t","Batt: <left>"] 600
+                    -- , Run Volume "default" "Master" [] 10
+                    -- , Run Wireless "wlp6s0" [] 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }        <fc=#FFFFFF>%time%</fc>{ %CYKF% | %battery% | <fc=#FFFFFF>%date%</fc> |"
+       , template = "%StdinReader% }        <fc=#FFFFFF>%time%</fc>{ %dynnetwork% | %CYKF% | <fc=#FFFFFF>%date%</fc> |"
        }

@@ -12,6 +12,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
+import XMonad.Layout.LayoutHints
 import System.IO
 import Data.Ratio ((%))
 
@@ -23,27 +24,29 @@ main = do
     [
   --  Power-state keys
       ("M-S-l", spawn "xscreensaver-command -lock")
-    , ("M-S-z", spawn "sudo pm-suspend")
-    , ("M-S-y", spawn "sudo pm-hibernate")
+    , ("M-S-z", spawn "systemctl suspend")
+    -- , ("M-S-y", spawn "sudo pm-hibernate")
     , ("M-S-e", spawn "gksudo -g --message 'Shut down?' poweroff")
     , ("M-S-r", spawn "gksudo -g --message 'Reboot?' reboot")
 
   --  Utility keys
     , ("M-<F12>", namedScratchpadAction myScratchPads "terminal")
     , ("M-b", sendMessage ToggleStruts)
+    , ("M-p", spawn "dmenu_run -fn \
+            \'DroidSansMonoForPowerline Nerd Font 16' -nf 'green' -sf 'green'")
     ]
 
-myTerminal = "gnome-terminal"
+myTerminal = "termite"
 
 myWorkspaces =
-    (map show [1..6]) ++ 
-    ["7","8","9"]
+    (map show [1..6]) ++
+    ["7","8-Pidgin","9"]
 
 myScratchPads = [
     NS "terminal" spawnTerm findTerm manageTerm
     ]
     where
-        spawnTerm = myTerminal ++ " --role=scratchpad --hide-menubar"
+        spawnTerm = myTerminal ++ " --role=scratchpad"
         findTerm = stringProperty "WM_WINDOW_ROLE" =? "scratchpad"
         manageTerm = customFloating $ W.RationalRect l t w h
             where           --All below are fractions of screen size
@@ -54,7 +57,9 @@ myScratchPads = [
 
 myConfig xmobarProc = defaultConfig
         { workspaces = myWorkspaces
+        , terminal = myTerminal
         , manageHook = myManageHook <+> manageHook defaultConfig
+        , handleEventHook = myHandleEventHook <+> handleEventHook defaultConfig
         , layoutHook = myLayoutHook
         , modMask = mod4Mask
         , logHook = dynamicLogWithPP xmobarPP
@@ -64,20 +69,20 @@ myConfig xmobarProc = defaultConfig
         , focusFollowsMouse = False
         }
 
-myLayoutHook = avoidStruts $
+myLayoutHook = layoutHintsToCenter $ avoidStruts $
     onWorkspace "7" skypeLayout $
-    onWorkspace "8" imLayout $
+    onWorkspace "8-Pidgin" imLayout $
     standardLayouts
 
-standardLayouts = 
-     noBorders simpleTabbed
-     ||| myTallLayout
+standardLayouts =
+     myTallLayout
      ||| Mirror myTallLayout
+     ||| noBorders simpleTabbed
      ||| noBorders Full
 
 imLayout = withIM (1/5) pidginMainWindow standardLayouts
     where
-        pidginMainWindow = 
+        pidginMainWindow =
             (Role "buddy_list")
 
 skypeLayout = withIM (1/5) skypeMainWindow standardLayouts
@@ -101,6 +106,11 @@ myManageHook = composeAll
     , resource =? "skype"    --> doShift "7"  -- Force to Skype workspace.
     , manageDocks
     , manageScratchPad
+    ]
+
+myHandleEventHook = composeAll
+    [
+      hintsEventHook
     ]
 
 manageScratchPad :: ManageHook

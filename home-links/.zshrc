@@ -1,19 +1,20 @@
+export TERM=xterm-256color
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-export POWERLEVEL9K_MODE="awesome-fontconfig"
-export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+export POWERLEVEL9K_STATUS_VERBOSE=false
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode time)
 export POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+# export ZLE_RPROMPT_INDENT=0
 
-plugins=(vi-mode)
 #begin antigen
 
 source ~/dotfiles/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundle git
-# antigen bundle vi-mode
+antigen bundle vi-mode
 antigen bundle last-working-dir
 antigen bundle copydir
 antigen bundle copyfile
@@ -25,7 +26,11 @@ antigen bundle web-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Theme
-antigen theme bhilburn/powerlevel9k powerlevel9k
+if (( $(echotc Co) >= 256 )); then
+    if [[ ! ($(tty) =~ ^/dev/tty) ]]; then
+        antigen theme bhilburn/powerlevel9k powerlevel9k
+    fi
+fi
 # export ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Tell antigen that you're done.

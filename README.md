@@ -16,3 +16,4 @@ My linux dotfiles
 2. [TODO] solarized stuff (dircolors, shell, etc.)
 3. [TODO] font stuff
 4. [TODO] add per-machine configuration extentions
+xfce4-terminal + config file (~/.config/xfce4/terminal/termincalrc
