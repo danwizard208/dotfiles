@@ -1,18 +1,9 @@
-[submodule "gnome-terminal-colors-solarized"]
-	path = gnome-terminal-colors-solarized
-	url = https://github.com/Anthony25/gnome-terminal-colors-solarized
 [submodule "dircolors-solarized"]
 	path = dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
 [submodule "awesome-terminal-fonts"]
 	path = awesome-terminal-fonts
 	url = https://github.com/gabrielelana/awesome-terminal-fonts
-[submodule "fonts"]
-	path = fonts
-	url = https://github.com/powerline/fonts
 [submodule "antigen"]
 	path = antigen
 	url = https://github.com/zsh-users/antigen
-[submodule "xresources-solarized"]
-	path = xresources-solarized
-	url = https://github.com/solarized/xresources
