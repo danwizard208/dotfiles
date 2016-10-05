@@ -26,6 +26,8 @@
 	plr = pull --rebase
 	fmod = diff --name-status
 	h = help
+	preview = diff --cached
+	u = add -u
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3

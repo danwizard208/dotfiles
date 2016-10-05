@@ -1,0 +1,8 @@
+oh() {
+    mkdir -p "$TODIR_ROOT/todo/$1"
+}
+if [[ -z $TODIR_ROOT ]]; then
+    print "TODIR_ROOT not set. Initializing to $HOME/todir."
+    export TODIR_ROOT="$HOME/todir"
+fi
+# vim:filetype=zsh
